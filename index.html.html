@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Consulta de Bônus · Localiza Seminovos</title>
+<style>
+:root{--bg:#f2f6f2;--card:#fff;--tx:#12301c;--mut:#5b7061;--br:#d8e3d9;--g:#0a7a35;--o:#f26b1d;--soft:#eaf6ee;box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a12;--card:#16261c;--tx:#e6f1e8;--mut:#98ae9f;--br:#26402f;--g:#5fd17f;--o:#ff8a45;--soft:#1b3324}}
+:root[data-theme="dark"]{--bg:#0d1a12;--card:#16261c;--tx:#e6f1e8;--mut:#98ae9f;--br:#26402f;--g:#5fd17f;--o:#ff8a45;--soft:#1b3324}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:linear-gradient(135deg,#054d22,#0a7a35);color:#fff;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 16px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:34px;height:38px;flex:none}
+.logo b{display:block;font-size:20px;letter-spacing:-.3px;line-height:1}.logo i{font-style:normal;font-size:13px;letter-spacing:.14em;color:#c8f26b;font-weight:600}
+header h1{margin:14px 0 2px;font-size:21px}header p{margin:0;font-size:13px;opacity:.85}
+.band{height:5px;background:linear-gradient(90deg,var(--o),#c8f26b)}
+main{max-width:720px;margin:0 auto;padding:12px 14px 40px}
+.tabs{display:flex;gap:6px;margin:2px 0 12px}
+.tabs button{flex:1;padding:10px 6px;border:1px solid var(--br);background:var(--card);color:var(--tx);border-radius:999px;font:inherit;font-weight:600;cursor:pointer}
+.tabs button.on{background:var(--o);border-color:var(--o);color:#fff}
+.box{background:var(--card);border:1px solid var(--br);border-radius:16px;padding:14px;margin-bottom:12px}
+.box h2{margin:0 0 10px;font-size:15px}
+.f{display:block;margin-bottom:10px;font-size:12.5px;color:var(--mut);font-weight:600}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+input,select{width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--br);border-radius:10px;background:var(--bg);color:var(--tx);font:16px system-ui,sans-serif}
+.sug{margin-top:6px;display:grid;gap:5px}
+.sug button{text-align:left;padding:9px 11px;border:1px solid var(--br);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit;font-size:13.5px;cursor:pointer}
+.pick{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--g);border-radius:10px;padding:9px 11px;margin-top:4px;font-weight:700;font-size:13.5px}
+.pick button{border:0;background:none;color:var(--o);font-weight:700;cursor:pointer;font:inherit}
+.tot{background:linear-gradient(135deg,#054d22,#0a7a35);color:#fff;border-radius:16px;padding:16px;margin-bottom:10px}
+.tot small{opacity:.85}.tot .n{font-size:32px;font-weight:800;color:#c8f26b}
+.ln{display:flex;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--br);border-radius:12px;padding:11px 12px;margin-bottom:7px}
+.ln b{font-size:14px}.ln span{display:block;font-size:12.5px;color:var(--mut);margin-top:2px}
+.ln .v{font-weight:800;color:var(--g);white-space:nowrap;text-align:right}.ln .v.z{color:var(--mut);font-weight:600}
+.note{font-size:12.5px;color:var(--mut);margin:6px 0 10px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:1px solid var(--br);border-radius:12px;padding:10px 12px;margin-bottom:7px}
+.row b{font-size:13.5px;font-weight:600}
+.val{text-align:right;white-space:nowrap;font-weight:700;color:var(--g)}.val s{display:block;font-weight:400;font-size:12px;color:var(--mut)}
+.tag{display:inline-block;background:var(--o);color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+.late{font-size:11px;color:var(--mut);display:block}
+.ck{display:flex;gap:8px;align-items:center;color:var(--mut);font-size:13px;margin:6px 0}.ck input{width:auto;margin:0}
+.act{background:var(--card);border:1px solid var(--br);border-radius:14px;padding:14px;margin-bottom:10px}
+.act h3{margin:0 0 4px;font-size:16px}.big{font-size:22px;font-weight:800;color:var(--g);margin:2px 0 6px}
+.act ul{margin:6px 0 0;padding-left:18px}.act li{margin:2px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.chip{font-size:11.5px;padding:2px 8px;border-radius:999px;border:1px solid var(--br);color:var(--mut)}
+.chip.y{background:var(--g);border-color:var(--g);color:#fff}.chip.n{background:#c0392b;border-color:#c0392b;color:#fff}
+.empty{text-align:center;color:var(--mut);padding:20px}
+.wb{background:#fff1d6;color:#6b3a00;padding:9px 16px;font-size:13px;font-weight:600;text-align:center}.wb.bad{background:#c0392b;color:#fff}
+.clr{width:100%;padding:11px;margin-bottom:12px;border:1px solid var(--o);background:transparent;color:var(--o);border-radius:10px;font:700 15px system-ui,sans-serif;cursor:pointer}
+.seg{display:flex;gap:8px;margin-top:6px}.seg button{flex:1;padding:11px;border:1px solid var(--br);background:var(--bg);color:var(--tx);border-radius:10px;font:600 15px system-ui,sans-serif;cursor:pointer}.seg button.on{background:var(--o);border-color:var(--o);color:#fff}
+@media(min-width:900px){main{max-width:1120px;padding-top:18px}.cols{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:20px;align-items:start}.cols #res{position:sticky;top:12px}#list,.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));column-gap:10px;align-items:start}.agrid .act{margin:0 0 10px}.tabs{max-width:520px}header{padding-left:max(16px,calc((100vw - 1120px)/2 + 14px));padding-right:16px}.tot .n{font-size:38px}}
+footer{font-size:12px;color:var(--mut);margin-top:16px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo"><svg viewBox="0 0 40 44" aria-hidden="true"><path d="M17 3 31 0v12q0 3-3 4l-11 5z" fill="#f26b1d"/><path d="M3 25 16 19v17h12q3 0 3 3v3H19A16 16 0 0 1 3 28z" fill="#fff"/></svg><div><b>Localiza</b><i>SEMINOVOS</i></div></div>
+<h1>Consulta de bônus</h1><p>Compra de Gente Grande · Outubro de 2026 · atualização de 28/10</p>
+</header><div class="band"></div><div id="warn"></div>
+<main>
+<div class="tabs" id="tabs"></div>
+<div id="app"><noscript><div class="box"><h2>⚠ A página não carregou</h2><p>Este site precisa de JavaScript e não funciona na pré-visualização de arquivos do iPhone. Abra pelo link publicado no Safari ou no Chrome.</p></div></noscript></div>
+<footer>Fonte: “Atualização Ações de Vendas Varejo – 28/10”. Nomes dos modelos abreviados. O bônus é aplicado pela precificação via app “Especiais – Varejo”; confirme sempre no app antes de fechar a negociação.</footer>
+</main>
+<script>
+const NAT=`ARGO 1.0 2025|1000
+ARGO DRIVE 1.0 2026|4000|4500
+CIVIC ADVANCED HEV 2.0 2024|15000
+COMMANDER LIMITED 7L 1.3 T270 AT 2025|10000
+COMPASS LONGITUDE 1.3 T270 AT 2025|16000|17000
+CRETA COMFORT 1.0 TGDI AT 2026|6000
+FASTBACK AUDACE T200 HÍBRIDO 2025|4000
+FASTBACK AUDACE T200 HÍBRIDO 2026|10000|10700
+HB20 COMFORT 1.0 2026|6500|7500
+HB20 COMFORT PLUS 1.0 2025|1000
+HB20 COMFORT PLUS TGDI AT 2025|3000
+HB20 LIMITED 1.0 2026|1000|1500
+HB20 LIMITED TGDI AT 2026|4000
+HB20S COMFORT 1.0 2026|3500|4500
+HB20S COMFORT PLUS TGDI AT 2025|1500
+KARDIAN EVOLUTION TURBO AT 2025|2000
+KICKS ADVANCE TURBO AT 2026|8000
+KWID ZEN 1.0 2025|2000
+KWID ZEN 1.0 2026|5000|5500
+MOBI LIKE 1.0 8V 2025|3000|4500
+MOBI LIKE 1.0 2025|3000|4500
+MOBI LIKE 1.0 2026|5500|6500
+MOBI TREKKING 1.0 2026|3000|3500
+ONIX FLEX 1.0 2026|5500|7000
+ONIX LT 1.0 2025|4000|5000
+ONIX PLUS FLEX 1.0 2026|6000|7000
+ONIX PLUS LTZ TURBO AT 2025|4000
+ONIX PLUS PREMIER II TURBO AT 2025|2000
+ONIX PREMIER II TURBO AT 2025|6000|6500
+POLO HIGHLINE 1.0 TSI AT 2026|7500
+POLO TRACK 1.0 2025|1000
+POLO TRACK 1.0 2026|2500|4000
+PULSE AUDACE T200 HÍBRIDO 2026|9000|9500
+RENEGADE LONGITUDE 1.3 T270 AT 2024|4000
+RENEGADE LONGITUDE 1.3 T270 AT 2025|8000
+RENEGADE LONGITUDE 1.3 T270 AT 2026|15000
+S10 CD LS 2.8 DIESEL 4X4 2024|10000
+SAVEIRO ROBUST 1.6 2025|4000
+STRADA ENDURANCE CP 1.3 2025|4000|4500
+TAOS HIGHLINE 1.4 250 TSI AT 2024|14000|15500
+T-CROSS 1.0 200 TSI AT 2025|8000|8700
+T-CROSS 1.0 200 TSI AT 2026|12000|12700
+T-CROSS COMFORTLINE 1.0 200 TSI AT 2025|8000
+T-CROSS HIGHLINE 1.4 250 TSI AT 2024|8000
+T-CROSS HIGHLINE 1.4 250 TSI AT 2025|10000
+T-CROSS HIGHLINE 1.4 250 TSI AT 2026|16000
+TERA HIGH 1.0 TSI AT 2026|10000
+TORO FREEDOM 1.3 T270 AT 2026|10000
+TRACKER PREMIER 1.2 TURBO AT 2025|8000
+ZR-V TOURING 2.0 AT 2025|15000`;
+const R={
+cmg:{n:"RSCEN – RSCMG",s:"28/10",d:`ARGO DRIVE 2025|1500
+ARGO DRIVE 2026|7000|7500
+CRETA LIMITED TGDI AT 2026|6000
+FASTBACK AUDACE T200 HÍBRIDO 2026|12000|12700
+HB20 COMFORT PLUS 2025|2000
+HB20S COMFORT 2026|5000|6000
+KWID ZEN 2026|7500|8000
+MOBI LIKE 1.0 8V 2025|4000|5500
+MOBI LIKE 1.0 2025|4000|5500
+MOBI LIKE 1.0 2026|8000|9000
+MOBI TREKKING 2026|6500|7000
+ONIX FLEX 2026|7500|9000
+ONIX LT 2025|5000|6000
+ONIX PLUS FLEX 2026|7000|8000
+ONIX PLUS LTZ TURBO AT 2025|6000
+ONIX PLUS PREMIER II TURBO AT 2025|3000
+POLO COMFORTLINE TSI AT 2025|2500
+POLO HIGHLINE TSI AT 2026|9500
+POLO TRACK 2026|4000|5500
+PULSE AUDACE T200 HÍBRIDO 2026|9500|10000
+RENEGADE LONGITUDE T270 AT 2024|6000
+RENEGADE LONGITUDE T270 AT 2025|13500
+STRADA ENDURANCE CP 1.3 2025|5000|5500
+STRADA FREEDOM CD 1.3 2025|2500
+T-CROSS 1.0 200 TSI AT 2025|10500|11200
+T-CROSS 1.0 200 TSI AT 2026|14000|14700
+T-CROSS HIGHLINE 1.4 250 TSI AT 2025|13500`},
+coe:{n:"RSCOE – RSCOS",s:"28/10",d:`ARGO DRIVE 2026|5000|5500
+C3 LIVE PACK 2024|2000
+HB20 COMFORT 2026|6500
+HB20 LIMITED TGDI AT 2026|5000
+HB20 SENSE PLUS 2025|2000
+HB20S COMFORT 2026|4500|5500
+KWID ZEN 2025|2500
+KWID ZEN 2026|7000|7500
+MOBI LIKE 2026|5500
+MOBI TREKKING 2026|5000|5500
+ONIX FLEX 2026|5500
+ONIX LT 2025|5000|6000
+ONIX PLUS FLEX 2026|7000|8000
+POLO HIGHLINE TSI AT 2026|9500
+RENEGADE LONGITUDE T270 AT 2025|13500
+TAOS HIGHLINE 1.4 250 TSI AT 2024|15000|16500
+TERA HIGH TSI AT 2026|12500`},
+gsp:{n:"RSGSP – RSSAO – RSSPC – RSGSA",s:"28/10",d:`ARGO DRIVE 2025|1500
+ARGO DRIVE 2026|8000|8500
+COMMANDER LIMITED 7L T270 AT 2025|15000
+COMPASS LONGITUDE 1.3 T270 AT 2023|6000
+CRETA LIMITED TGDI AT 2026|6000
+HB20 COMFORT 2026|6500
+HB20S COMFORT 2026|4000|5000
+KWID ZEN 2026|8500|9000
+MOBI LIKE 1.0 8V 2025|4000|5500
+MOBI LIKE 1.0 2025|4000|5500
+MOBI LIKE 1.0 2026|7500|8500
+MOBI TREKKING 2026|6000|6500
+ONIX FLEX 2026|7500|9000
+ONIX PLUS FLEX 2026|7000|8000
+ONIX PLUS LTZ TURBO AT 2025|5500
+ONIX PREMIER II TURBO AT 2025|7000|7500
+POLO HIGHLINE TSI AT 2026|9000
+POLO TRACK 2026|4500|6000
+RENEGADE LONGITUDE T270 AT 2025|11500
+TAOS HIGHLINE 1.4 250 TSI AT 2024|15000|16500
+T-CROSS 1.0 200 TSI AT 2026|14000|14700
+T-CROSS HIGHLINE 1.4 250 TSI AT 2025|13500
+TERA HIGH TSI AT 2026|12500`},
+nde:{n:"RSNDE – RSNDL – RSNDN",s:"28/10",d:`COMMANDER LIMITED 7L T270 AT 2025|15000
+CRETA LIMITED TGDI AT 2026|6000
+FASTBACK AUDACE T200 HÍBRIDO 2026|12000|12700
+HB20 LIMITED TGDI AT 2026|5500
+HB20S COMFORT 2026|6000|7000
+HB20S COMFORT PLUS TGDI AT 2025|4000
+KWID ZEN 2026|7000|7500
+MOBI LIKE 1.0 8V 2025|4500|6000
+MOBI LIKE 1.0 2025|4500|6000
+MOBI LIKE 1.0 2026|5500
+ONIX FLEX 2026|5500
+ONIX LT 1.0 TURBO 2024|3000
+ONIX PLUS FLEX 2026|6500|7500
+ONIX PLUS LTZ TURBO AT 2025|6000
+ONIX PLUS PREMIER II TURBO AT 2025|4000
+POLO HIGHLINE TSI AT 2026|11000
+POLO TRACK 2026|4000|5500
+RENEGADE LONGITUDE T270 AT 2025|11500
+TAOS HIGHLINE 1.4 250 TSI AT 2024|15000|16500
+T-CROSS 1.0 200 TSI AT 2025|10000|10700
+T-CROSS HIGHLINE 1.4 250 TSI AT 2025|13500
+TERA HIGH TSI AT 2026|12500`},
+nor:{n:"RSNOR",s:"28/10",d:`ARGO DRIVE 2026|8000|8500
+CRETA LIMITED TGDI AT 2026|6000
+HB20 COMFORT 2026|6500
+HB20S COMFORT 2026|5000|6000
+NIVUS HIGHLINE 1.0 200 TSI AT 2025|6000
+ONIX FLEX 2026|6000|7500
+ONIX PLUS FLEX 2026|7000|8000
+ONIX PLUS LTZ TURBO AT 2025|6000
+POLO HIGHLINE TSI AT 2026|8500
+POLO TRACK 2026|3500|5000
+RENEGADE LONGITUDE T270 AT 2025|10000
+SAVEIRO ROBUST 1.6 2025|6000
+T-CROSS 1.0 200 TSI AT 2025|14000|14700
+T-CROSS 1.0 200 TSI AT 2026|14000|14700
+T-CROSS COMFORTLINE 1.0 200 TSI AT 2025|10000
+T-CROSS HIGHLINE 1.4 250 TSI AT 2025|13000`},
+rj:{n:"RSRJE – RSRIO",s:"23/10",d:`ARGO DRIVE 2025|1500
+ARGO DRIVE 2026|6000|6500
+CRETA LIMITED TGDI AT 2026|6000
+FIORINO ENDURANCE 1.4 2025|3000
+HB20 COMFORT PLUS 2025|2000
+KWID ZEN 2025|3000
+KWID ZEN 2026|7500|8000
+MOBI LIKE 1.0 8V 2025|4000|5500
+MOBI LIKE 1.0 2025|4000|5500
+MOBI LIKE 1.0 2026|7500|8500
+MOBI TREKKING 2026|5500|6000
+NIVUS HIGHLINE 1.0 200 TSI AT 2025|4000
+ONIX FLEX 2026|6500|8000
+ONIX LT 2025|5000|6000
+ONIX PLUS FLEX 2026|7000|8000
+ONIX PLUS LTZ TURBO AT 2025|6000
+ONIX PLUS PREMIER II TURBO AT 2025|4000
+ONIX PREMIER II TURBO AT 2025|7000|7500
+POLO HIGHLINE TSI AT 2026|8500
+POLO TRACK 2026|4500|6000
+RENEGADE LONGITUDE T270 AT 2025|11500
+STRADA ENDURANCE CP 1.3 2025|4500|5000
+STRADA FREEDOM CD 1.3 2025|3500
+TAOS HIGHLINE 1.4 250 TSI AT 2024|15000|16500
+T-CROSS 1.0 200 TSI AT 2025|10000|10700
+T-CROSS 1.0 200 TSI AT 2026|14000|14700
+T-CROSS COMFORTLINE 1.0 200 TSI AT 2025|10000
+T-CROSS HIGHLINE 1.4 250 TSI AT 2025|13500
+TERA HIGH TSI AT 2026|12500`},
+sp:{n:"RSSPI – RSSPO",s:"23/10",d:`ARGO DRIVE 2026|9500|10000
+COMPASS LONGITUDE 2.0 DIESEL 4X4 AT 2023|6000
+CRETA LIMITED TGDI AT 2026|6000
+FASTBACK AUDACE T200 HÍBRIDO 2026|12000|12700
+HB20 COMFORT PLUS 2025|1500
+HB20 LIMITED TGDI AT 2026|5500
+HB20S COMFORT 2026|4500|5500
+KWID ZEN 2026|8500|9000
+MOBI LIKE 1.0 8V 2025|4000|5500
+MOBI LIKE 1.0 2025|4000|5500
+MOBI LIKE 1.0 2026|7000|8000
+MOBI TREKKING 2026|6500|7000
+NIVUS HIGHLINE 1.0 200 TSI AT 2025|4000
+ONIX FLEX 2026|7000|8500|28
+ONIX PLUS FLEX 2026|8000|9000|28
+ONIX PLUS LTZ TURBO AT 2025|5000||28
+ONIX PLUS PREMIER II TURBO AT 2025|5000||28
+ONIX PREMIER II TURBO AT 2025|8000|8500|28
+POLO HIGHLINE TSI AT 2026|9000||28
+POLO TRACK 2026|3000|4500|28
+RENEGADE LONGITUDE T270 AT 2025|11500||28
+T-CROSS HIGHLINE 1.4 250 TSI AT 2025|13500||28
+TERA HIGH TSI AT 2026|12500||28`},
+sul:{n:"RSSUL – RSSSE – RSSSC",s:"28/10",d:`ARGO DRIVE 2026|7500|8000
+CIVIC ADVANCED HEV 2.0 2024|18000
+CRETA LIMITED TGDI AT 2026|6000
+FASTBACK AUDACE T200 HÍBRIDO 2026|12000|12700
+HB20 COMFORT 2026|6500
+HB20S COMFORT 2026|5000|6000
+KWID ZEN 2026|7500|8000
+MOBI LIKE 2026|7000|8000
+MOBI TREKKING 2026|5000|5500
+ONIX FLEX 2026|6500|8000
+ONIX LT 2025|5000|6000
+POLO TRACK 2026|4500|6000
+S10 CD LS 2.8 DIESEL 4X4 2024|15000
+T-CROSS HIGHLINE 1.4 250 TSI AT 2025|13500
+VIRTUS 12V TSI 1.0 2024|8000`}};
+const ACT=[
+{t:"Bônus Regional",big:"até R$ 4.000",s:"27/10",ch:["Acumulativo"],li:["Todos os modelos","Bônus limitado: consulte o divisional para validar na negociação","Pedido via PowerApps “Bônus Especiais – Varejo” (SLA de 30 min)"]},
+{t:"Bônus Troca · SUV, Executivo e Intermediário",s:"07/10",ch:["Acumulativo"],li:["Preço placa < R$ 120 mil: SUV/Executivo R$ 5.000 (era R$ 3.000) · Intermediário R$ 3.000","Preço placa ≥ R$ 120 mil: SUV/Executivo R$ 8.000 (era R$ 5.000) · Intermediário R$ 5.000","Contratos abertos a partir de 07/10; solicitar via APP; lista de modelos no BI de Ações Comerciais"]},
+{t:"Bônus Recompra",big:"R$ 2.000",s:"01/10",ch:["Acumulativo"],li:["Todos os modelos, só para clientes que já compraram na Localiza Seminovos (não extensivo a terceiros)","Aplicado por precificação via formulário no APP (SLA de 30 min)"]},
+{t:"Garantia Estendida Grátis",s:"01/10",li:["Modelos elegíveis: SUV, Premium e Executivo (placas elegíveis)","Não vale para: diesel, mais de 3 anos de fabricação, mais de 100 mil km, biturbo, uso comercial ou PJ, elétricos e híbridos"]},
+{t:"Bônus Financiamento CP",s:"19/10",ch:["Acumulativo"],li:["Preço placa até R$ 80.000: R$ 2.000 · acima de R$ 80.000: R$ 3.000","Válido para Crédito Parcial aprovado em R3","Solicitado pelo divisional via APP; aplicado em até 20 min pela precificação"]},
+{t:"Descontão Seminovos · Edição Extraordinária",big:"10% off",s:"01/10 a 31/10",ch:["Acumulativo"],li:["Desconto no preço do carro, acumulativo com o bônus de precificação vigente na compra","Benefício para colaboradores, extensível a pais, irmãos, filhos e cônjuges"]},
+{t:"Bônus PJ e Produtor Rural",s:"01/10",ch:["Não acumulativo"],bad:1,li:["S10 LTZ 2026: R$ 15.000","Famílias S10, L200, Ranger, Hilux, Frontier e Amarok: R$ 10.000","Famílias Saveiro e Strada: R$ 6.000 · Toda linha Fiorino: R$ 6.000","Anexar Cartão CNPJ ou Certificado de Atividade Rural na solicitação"]},
+{t:"Bônus TP (tempo de pátio)",big:"até R$ 4.000",s:"01/10",ch:["Acumulativo"],li:["90 a 119 dias: R$ 1.500","120 a 149 dias: R$ 2.500","150 dias ou mais: R$ 4.000"]},
+{t:"Bônus KM",big:"R$ 2.500",s:"01/10",ch:["Acumulativo"],li:["Placas acima de R$ 80.000, ano modelo 2025 e 2026, com mais de 40.000 km"]},
+{t:"Motoristas de App e Táxi",big:"Taxa 0,99%",s:"01/10",li:["Até 36x, entrada mínima de 60%, sem desconto, todos os modelos","Financiamento Santander; vendas faturadas até 31/10/2026","Comprovar mínimo de 50 corridas no APP ou cadastro ativo de taxista"]},
+{t:"Financiamento até 72x",s:"Outubro",li:["Banco Stellantis, entrada a partir de 40%, todos os modelos","Aprovação sujeita a análise de crédito"]},
+{t:"Parcelamento no cartão · até 24x com juros",s:"Outubro",li:["Somente no PDV; até 100% do veículo (só a parcela do carro, produtos não entram)","Hipercard até 12x · Mastercard até 21x · Visa e Elo até 24x","Todos os modelos; placas LQV não são elegíveis"]},
+{t:"Ação Cross RAC & Seminovos",s:"Outubro",ch:["Acumulativo"],li:["Cupom Fidelidade Gold: R$ 1.000 · Platinum: R$ 3.000, todos os modelos","Limitado a uma compra por CPF (não extensivo a parentes e amigos)","Pedir o cupom por e-mail (ana.macedo@localiza.com) informando CPF do cliente e placa"]},
+{t:"Doe um carrinho e saia de carrão",big:"R$ 1.000 por carrinho",s:"Prorrogada até 31/10",ch:["Acumulativo com ofertas"],li:["Cliente doa um carrinho de brinquedo e ganha o desconto na compra de um seminovo","Não acumulativo com desconto de colaborador","Loja guarda as doações e registra o volume; Instituto Localiza faz a destinação"]}];
+const parse=d=>d.trim().split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{n:a,v:+(c||b),o:c?+b:null,late:e}});
+const strip=n=>n.replace(/\b\d\.\d\b/g,"").replace(/\s+/g," ").trim();
+const NATL=parse(NAT).map(r=>({...r,k:strip(r.n)}));
+const REGL={};for(const[k,v]of Object.entries(R))REGL[k]=parse(v.d).map(r=>({...r,k:strip(r.n)}));
+function models(reg){const m=new Map();for(const r of NATL)m.set(r.k,{k:r.k,name:r.n,nat:r});for(const r of REGL[reg]){const e=m.get(r.k);if(e)e.reg=r;else m.set(r.k,{k:r.k,name:r.n,reg:r})}return[...m.values()].sort((a,b)=>a.name.localeCompare(b.name))}
+const $=s=>document.querySelector(s);
+const S={tab:"c",reg:"cmg",q:"",sel:null,preco:"",km:"",tp:"",troca:"",code:"RSCEN – RSCMG",dsc:"",ent:"",rc:false,rb:false,rbv:"4000",car:"",col:false,cp:false,pj:"",tbl:"nat",tq:"",up:false};
+const money=n=>"R$ "+n.toLocaleString("pt-BR");
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const regOpts=()=>Object.entries(R).map(([k,v])=>`<option value="${k}|${v.n}" ${v.n==S.code?"selected":""}>${v.n}</option>`).join("");
+
+function consult(){
+ const m=S.sel&&models(S.reg).find(x=>x.k==S.sel);
+ const sug=$("#sug"),res=$("#res");
+ if(!m){
+  const q=S.q.trim().toLowerCase();
+  const l=q?models(S.reg).filter(x=>x.name.toLowerCase().includes(q)).slice(0,8):[];
+  sug.innerHTML=l.map(x=>`<button data-k="${esc(x.k)}">${esc(x.name)}</button>`).join("")||(q?'<div class="empty">Modelo não encontrado.</div>':"");
+ }else sug.innerHTML=`<div class="pick"><span>${esc(m.name)}</span><button data-clear="1">Trocar</button></div>`;
+ const B=[],add=(t,s,v,car)=>{const o={t,s,v:v||0,car:!!car};B.push(o);return o};
+ const pr=S.preco===""?null:+S.preco;
+ if(m){
+  const n=m.nat?m.nat.v:0,r=m.reg?m.reg.v:0,best=Math.max(n,r);
+  const who=n==r?(n?"valores iguais":""):(r>n?"Regional":"Nacional");
+  const det=m.nat&&m.reg?`Nacional ${money(n)} · Regional ${S.code} ${money(r)} → vale o maior (${who})`:m.nat?"Só há bônus nacional para este modelo nesta região":"Só há bônus regional para este modelo";
+  add("Bônus do modelo / ano",best?det:"Este modelo não tem bônus nacional nem regional",best);
+ }else add("Bônus do modelo / ano","Escolha o modelo acima",0);
+ const d=S.tp===""?null:+S.tp;let tp=null;
+ if(d!==null&&!isNaN(d))tp=d>=150?4000:d>=120?2500:d>=90?1500:0;
+ add("Bônus tempo de pátio",tp===null?"Informe os dias de pátio":tp?`${d} dias → faixa ${d>=150?"150 dias ou mais":d>=120?"120 a 149 dias":"90 a 119 dias"}`:"Abaixo de 90 dias: sem bônus",tp);
+ const km=S.km===""?null:+S.km,ano=m?+(m.name.match(/(\d{4})$/)||[])[1]:null;
+ let kb=0,kd="Informe km e preço placa";
+ if(km!==null&&pr!==null&&m){const ok=[];if(km<=40000)ok.push("km precisa ser acima de 40.000");if(pr<=80000)ok.push("preço placa precisa ser acima de R$ 80.000");if(ano!==2025&&ano!==2026)ok.push("ano modelo precisa ser 2025 ou 2026");kb=ok.length?0:2500;kd=ok.length?"Sem bônus: "+ok.join("; "):"Placa acima de 40.000 km, ano "+ano+", preço acima de R$ 80.000"}
+ else if(km!==null&&pr!==null)kd="Escolha o modelo para validar o ano";
+ add("Bônus KM",kd,kb);
+ let tb=0,td="Marque se o cliente dará carro na troca";
+ if(S.troca){if(pr===null)td="Informe o preço placa";else{const hi=pr>=120000;tb=S.troca=="suv"?(hi?8000:5000):(hi?5000:3000);td=(S.troca=="suv"?"SUV/Executivo":"Intermediário")+" · preço placa "+(hi?"a partir de R$ 120.000":"abaixo de R$ 120.000")}}
+ add("Bônus troca",td,tb);
+ let W=["Regra do site: somam-se apenas os 2 maiores bônus; o carrinho pode entrar por cima deles. A venda deve ser lançada em outubro e o valor final é aplicado pela precificação via app “Especiais – Varejo”.","Cross RAC (R$ 1.000 / R$ 3.000) não está na calculadora: veja a aba Ações."];
+ if(S.rb){add("Bônus Regional","Autorizado pelo gerente · limitado a R$ 4.000",Math.min(Math.max(+S.rbv||0,0),4000));W.push("Regional: bônus limitado, só use com a validação do divisional.")}
+ if(S.cp){add("Bônus CP",pr===null?"Informe o preço placa":pr>80000?"Preço placa acima de R$ 80.000":"Preço placa até R$ 80.000",pr===null?0:pr>80000?3000:2000);W.push("CP: só com Crédito Parcial aprovado em R3, solicitado pelo divisional via APP.")}
+ if(S.rc){add("Bônus Recompra","Cliente que já comprou na Localiza Seminovos · R$ 2.000",2000);W.push("Recompra: vale só para clientes que já compraram na Localiza Seminovos, não extensivo a terceiros.")}
+ const nc=S.car!==""?1:0;
+ if(nc>0)add("Doe um carrinho",S.col?"Não acumula com desconto de colaborador: não somado":"R$ 1.000 (1 por troca) · entra por cima dos 2 maiores · até 31/10",S.col?0:nc*1000,true);
+ const top=B.filter(x=>!x.car&&!x.info&&x.v>0).sort((a,b)=>b.v-a.v).slice(0,2);
+ B.forEach(x=>x.on=x.v>0&&(x.car||top.includes(x)));
+ let tot=B.reduce((s,x)=>s+(x.on?x.v:0),0);
+ if(S.pj){const pv={s10ltz:15000,pick:10000,sav:6000,fio:6000}[S.pj],o=tot,pj=add("Bônus PJ / Produtor Rural","",pv);
+  if(pv>o){B.forEach(x=>x.on=false);pj.on=true;tot=pv;pj.s="Não acumulativo: rende mais que a soma dos demais ("+money(o)+"), então só ele é usado"}
+  else{pj.on=false;pj.no="Não usado nesta conta";pj.s="Não acumulativo: a soma dos demais ("+money(o)+") rende mais"}
+  W.push("PJ/Rural: anexar Cartão CNPJ ou Certificado de Atividade Rural na solicitação.")}
+ if(S.troca)W.push("Troca: solicitar o bônus via APP.");
+ if(S.reg=="rj")W.push("RJ: alguns valores vieram com erro de digitação no PDF (R$6..500 e R$8000); foram lidos como R$ 6.500 e R$ 8.000. Confirme.");
+ const pc=n=>n.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%";
+ const baseD=pr===null?null:Math.max(pr-tot,0),dvIn=S.dsc===""?null:Math.max(parseFloat(S.dsc)||0,0),dpx=S.col?10:(dvIn===null||!baseD)?null:dvIn/baseD*100;
+ const sg=S.col?["#1e9e4a","#fff","VERDE","Colaborador · desconto fixo de 10%"]:dpx===null?null:dpx<3?["#1e9e4a","#fff","VERDE","Desconto até 2,9%"]:dpx<4?["#f5c400","#2b2100","AMARELO","Desconto de 3% a 3,9%"]:dpx<6?["#f26b1d","#fff","LARANJA","Desconto de 4% a 5,9%"]:["#d32f2f","#fff","VERMELHO","Desconto de 6% ou mais · precisa de autorização"];
+ const sig=sg?`<div style="background:${sg[0]};color:${sg[1]};border-radius:14px;padding:14px;text-align:center;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,.25)"><div style="font-size:34px;line-height:1">●</div><div style="font-size:24px;font-weight:800;letter-spacing:.04em">${sg[2]} · ${pc(dpx)}</div><div style="font-size:13px;font-weight:600">${sg[3]}</div></div>`:(S.dsc!==""&&!S.col?'<div class="note">Informe o preço placa para ver o % e o sinal do desconto.</div>':"");
+ $("#sig").innerHTML=sig;
+ let fin="";
+ if(pr===null)fin='<div class="note">Informe o preço placa para ver o preço final.</div>';
+ else{
+  const base=Math.max(pr-tot,0),dv=S.col?Math.round(base*0.1):Math.min(Math.max(parseFloat(S.dsc)||0,0),base),dp=base>0?dv/base*100:0,final=base-dv,ent=Math.max(+S.ent||0,0);
+  const pc=n=>n.toLocaleString("pt-BR",{maximumFractionDigits:2})+"%";
+  const ln=(a,b,v)=>`<div class="ln"><div><b>${a}</b>${b?`<span>${b}</span>`:""}</div><div class="v">${v}</div></div>`;
+  let big,lab;
+  if(ent>0&&ent<final){big=final-ent;lab="Valor financiado"}else if(ent>0){big=0;lab="Entrada cobre o valor do carro"}else{big=final;lab="À vista"}
+  fin=`<h2 style="font-size:15px;margin:14px 0 8px">Cálculo do preço final</h2>`+ln("Preço placa","",money(pr))+ln("(−) Bônus somados","",money(tot))+ln("Valor após bônus","",money(base))+ln(`(−) ${S.col?"Desconto colaborador":"Desconto do consultor"}: ${pc(dp)}`,"Aplicado sobre o valor após bônus",money(dv))+sig+ln("Preço final estimado","",money(final))+(ent>0?ln("Entrada",final>0?`${pc(Math.round(ent/final*1000)/10)} do preço final`:"",money(ent)):"")+`<div class="tot"><small>${lab}</small><div class="n">${money(big)}</div><small>Simulação: o preço oficial é o aplicado pela precificação no app.</small></div>`;
+ }
+ const row=x=>{const st=x.v>0?(x.on?'<span style="color:var(--g);font-weight:600">✔ Somado no total</span>':`<span style="color:var(--o);font-weight:600">${x.no||"Não somado: só entram os 2 maiores bônus"}</span>`):"";
+  return `<div class="ln"><div><b>${x.t}</b><span>${x.s}</span>${st}</div><div class="v ${x.on?"":"z"}" style="${x.v>0&&!x.on&&!x.info?"text-decoration:line-through":""}">${x.v>0?money(x.v):"—"}</div></div>`};
+ res.innerHTML=`<div class="tot"><small>Bônus estimado para este carro</small><div class="n">${money(tot)}</div><small>${S.pj&&B.some(x=>x.on&&x.t.startsWith("Bônus PJ"))?"Bônus PJ (não acumulativo)":"Soma dos 2 maiores bônus"+(B.some(x=>x.car&&x.on)?" + carrinho":"")}</small></div>`+B.map(row).join("")+fin+`<div class="note">${W.join("<br>")}</div><button type="button" class="clr" data-clear-all="1">↺ Limpar filtros · nova consulta</button>`;
+}
+function rows(list){
+ const q=S.tq.trim().toLowerCase();
+ const l=list.filter(r=>(!q||r.n.toLowerCase().includes(q))&&(!S.up||r.o!=null)).sort((a,b)=>b.v-a.v);
+ if(!l.length)return'<div class="empty">Nenhum modelo encontrado.</div>';
+ return l.map(r=>`<div class="row"><b>${esc(r.n)}${r.o!=null?'<span class="tag">NOVO VALOR</span>':""}${r.late?'<span class="late">vale a partir de 28/10</span>':""}</b><div class="val">${money(r.v)}${r.o!=null?`<s>${money(r.o)}</s>`:""}</div></div>`).join("");
+}
+const tbl=()=>$("#list").innerHTML=rows(S.tbl=="nat"?NATL:REGL[S.tbl]);
+function render(){
+ $("#tabs").innerHTML=[["c","Consultar"],["t","Tabelas"],["a","Ações"]].map(([k,t])=>`<button class="${S.tab==k?"on":""}" data-t="${k}">${t}</button>`).join("");
+ let h="";
+ if(S.tab=="c"){
+  h=`<div class="cols"><div><button type="button" class="clr" data-clear-all="1">↺ Limpar filtros · nova consulta</button><div class="box"><h2>1 · Veículo</h2><label class="f">Sua região<select id="reg">${regOpts()}</select></label><div class="note" style="margin:-4px 0 10px">O site compara o bônus Nacional com o da sua região e entrega o maior.</div><label class="f">Modelo (digite para buscar)<input id="q" type="search" autocomplete="off" placeholder="Ex.: onix, t-cross, mobi" value="${esc(S.q)}" ${S.sel?'style="display:none"':""}></label><div id="sug" class="sug"></div></div>
+  <div class="box"><h2>2 · Pátio, KM, preço e carrinho</h2><div class="g3"><label class="f">Pátio (dias)<input id="tp" type="number" inputmode="numeric" min="0" value="${S.tp}"></label><label class="f">KM rodados<input id="km" type="number" inputmode="numeric" min="0" value="${S.km}"></label><label class="f">Preço placa (R$)<input id="preco" type="number" inputmode="numeric" min="0" value="${S.preco}"></label></div><div class="f" style="margin:2px 0 0">🧸 Utilizar bônus carrinho? (R$ 1.000 · apenas 1 por troca)<div class="seg"><button type="button" data-car="0" class="${S.car===""?"on":""}">Não</button><button type="button" data-car="1" class="${S.car!==""?"on":""}">Sim</button></div></div></div>
+  <div class="box"><h2>3 · Bônus troca</h2><label class="f">Cliente vai dar um carro na troca?<select id="troca"><option value="" ${S.troca==""?"selected":""}>Não</option><option value="suv" ${S.troca=="suv"?"selected":""}>Sim · carro SUV ou Executivo</option><option value="int" ${S.troca=="int"?"selected":""}>Sim · carro Intermediário</option></select></label><div class="note">A categoria (SUV, Intermediário ou Executivo) do carro vendido está na lista do BI de Ações Comerciais. O valor depende do preço placa informado acima.</div></div>
+  <div class="box"><h2>4 · Outras ações e descontos</h2><label class="ck"><input type="checkbox" id="rb" ${S.rb?"checked":""}> Gerente autorizou o Bônus Regional</label><label class="f">Valor autorizado (até R$ 4.000)<input id="rbv" type="number" inputmode="numeric" min="0" max="4000" value="${S.rbv}"></label><label class="ck"><input type="checkbox" id="cp" ${S.cp?"checked":""}> Bônus CP · Crédito Parcial aprovado em R3 (R$ 2.000 até R$ 80 mil · R$ 3.000 acima)</label><label class="ck"><input type="checkbox" id="rc" ${S.rc?"checked":""}> Bônus Recompra · cliente que já comprou na Localiza Seminovos (R$ 2.000)</label><label class="f">Cliente PJ ou Produtor Rural<select id="pj"><option value="" ${S.pj==""?"selected":""}>Não</option><option value="s10ltz" ${S.pj=="s10ltz"?"selected":""}>S10 LTZ 2026 · R$ 15.000</option><option value="pick" ${S.pj=="pick"?"selected":""}>S10, L200, Ranger, Hilux, Frontier, Amarok · R$ 10.000</option><option value="sav" ${S.pj=="sav"?"selected":""}>Famílias Saveiro e Strada · R$ 6.000</option><option value="fio" ${S.pj=="fio"?"selected":""}>Toda linha Fiorino · R$ 6.000</option></select></label></div><div class="box"><h2>5 · Desconto e entrada</h2><div class="g2"><label class="f">Desconto do consultor (R$)<input id="dsc" type="number" inputmode="numeric" min="0" step="1" value="${S.col?"":S.dsc}" ${S.col?'disabled placeholder="10% automático"':""}></label><label class="f">Valor de entrada (R$)<input id="ent" type="number" inputmode="numeric" min="0" value="${S.ent}"></label></div><div class="f" style="margin:2px 0 0">Tipo de cliente<div class="seg"><button type="button" data-col="0" class="${S.col?"":"on"}">Cliente</button><button type="button" data-col="1" class="${S.col?"on":""}">Colaborador · 10%</button></div></div><div id="sig"></div></div></div><div id="res"></div></div>`;
+ }else if(S.tab=="t"){
+  h=`<div class="box"><label class="f">Tabela<select id="tbl"><option value="nat" ${S.tbl=="nat"?"selected":""}>Bônus nacionais</option>${Object.entries(R).map(([k,v])=>`<option value="${k}" ${k==S.tbl?"selected":""}>Regional · ${v.n}</option>`).join("")}</select></label><input id="tq" type="search" placeholder="Buscar modelo" value="${esc(S.tq)}"><label class="ck"><input type="checkbox" id="up" ${S.up?"checked":""}> Só valores atualizados</label></div><div class="note">Novas vendas a partir de ${S.tbl=="nat"?"28/10":R[S.tbl].s} · acumulativo. Valores riscados são os anteriores.${S.tbl=="rj"?" No PDF do RJ alguns valores vieram com erro de digitação (R$6..500 e R$8000); foram lidos como R$ 6.500 e R$ 8.000. Confirme.":""}</div><div id="list"></div>`;
+ }else h='<div class="agrid">'+ACT.map(a=>`<div class="act"><h3>${a.t}</h3>${a.big?`<div class="big">${a.big}</div>`:""}<div class="chips"><span class="chip">Desde ${a.s}</span>${(a.ch||[]).map(c=>`<span class="chip ${a.bad?"n":"y"}">${c}</span>`).join("")}</div><ul>${a.li.map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join("")+'</div>';
+ $("#app").innerHTML=h;
+ $("#warn").innerHTML=new Date()>=new Date("2026-11-01T00:00:00-03:00")?'<div class="wb bad">⚠ Estes valores são de outubro/2026 e já venceram. Peça a atualização antes de usar.</div>':'<div class="wb">⚠ Novos valores de modelo válidos de 28 a 31/10/2026 · vendas lançadas em outubro · confirme no app antes de negociar.</div>';
+ if(S.tab=="c")consult();if(S.tab=="t")tbl();
+}
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-t]");if(t){S.tab=t.dataset.t;render();return}
+ const k=e.target.closest("[data-k]");if(k){S.sel=k.dataset.k;render();return}
+ const c=e.target.closest("[data-car]");if(c){S.car=c.dataset.car=="1"?"1":"";render();return}
+ const co=e.target.closest("[data-col]");if(co){S.col=co.dataset.col=="1";render();return}
+ if(e.target.closest("[data-clear-all]")){Object.assign(S,{sel:null,q:"",tp:"",km:"",preco:"",troca:"",rb:false,rbv:"4000",car:"",col:false,cp:false,rc:false,pj:"",dsc:"",ent:""});render();window.scrollTo({top:0,behavior:"smooth"});return}
+ if(e.target.closest("[data-clear]")){S.sel=null;S.q="";render()}
+});
+document.addEventListener("input",e=>{const i=e.target.id;
+ if(i=="q"){S.q=e.target.value;consult()}
+ else if(["tp","km","preco","car","rbv","dsc","ent"].includes(i)){S[i]=e.target.value;consult()}
+ else if(i=="tq"){S.tq=e.target.value;tbl()}
+});
+document.addEventListener("change",e=>{const i=e.target.id;
+ if(i=="reg"){const[g,c]=e.target.value.split("|");S.reg=g;S.code=c;const m=models(S.reg);if(S.sel&&!m.some(x=>x.k==S.sel))S.sel=null;render()}
+ else if(i=="troca"){S.troca=e.target.value;consult()}
+ else if(i=="pj"){S.pj=e.target.value;consult()}
+ else if(["rb","cp","rc"].includes(i)){S[i]=e.target.checked;consult()}
+ else if(i=="tbl"){S.tbl=e.target.value;render()}
+ else if(i=="up"){S.up=e.target.checked;tbl()}
+});
+render();
+</script>
+</body>
+</html>
